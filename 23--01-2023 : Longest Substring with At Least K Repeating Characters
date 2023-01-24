@@ -1,0 +1,26 @@
+// Longest Substring with At Least K Repeating Characters
+
+class Solution {
+    public int longestSubstring(String s, int k) {
+        return maxstring(s, 0, s.length(), k);
+    }
+
+    int maxstring(String str, int s, int e, int k){
+        if(e < k) return 0;
+
+        HashMap<Character, Integer> map = new HashMap<Character, Integer>();
+        for(int i=s;i<e;i++){
+            map.put(str.charAt(i), map.getOrDefault(str.charAt(i), 0)+1);
+        }
+        
+        for(int i=s;i<e;i++){
+            if(map.get(str.charAt(i)) >= k) continue;
+
+            int j=i+1;
+            while(j<e && map.get(str.charAt(j)) < k) j++;
+
+            return Math.max(maxstring(str, s, i, k), maxstring(str, j, e, k));
+        }
+        return (e-s);
+    }
+}
