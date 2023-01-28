@@ -1,0 +1,21 @@
+// Diameter of Binary Tree
+
+class Solution {
+    int max_sum;
+    int sum(TreeNode node){
+        if (node == null){
+            return 0;
+        }
+        int left = sum(node.left);
+        int right = sum(node.right);
+        max_sum = Math.max(left + right + node.val, max_sum);        
+        return left + right + node.val;
+    }
+    public int maxPathSum(TreeNode root) {
+        if (root == null){
+            return 0;
+        }
+        sum(root);
+        return max_sum;
+    }
+}
