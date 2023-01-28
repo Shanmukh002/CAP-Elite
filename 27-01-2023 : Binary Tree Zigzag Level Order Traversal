@@ -1,0 +1,40 @@
+// Binary Tree Zigzag Level Order Traversal
+
+class Solution {
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        List<List<Integer>> list = new ArrayList<List<Integer>>();
+        if(root == null){
+            return list;
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        boolean isForward = true;
+
+        while(!queue.isEmpty()){
+            List<Integer> l = new ArrayList<Integer>();
+            int size = queue.size();
+            for(int i=1;i<=size;i++){
+                TreeNode curr = queue.poll();
+                l.add(curr.val);
+
+                if(curr.left!=null){
+                    queue.add(curr.left);
+                }
+                if(curr.right!=null){
+                    queue.add(curr.right);
+                }
+            }
+            if(isForward){
+                list.add(l);
+                isForward = false;
+            }
+            else{
+                Collections.reverse(l);
+                list.add(l);
+                isForward = true;
+            }
+        }
+        
+        return list;
+    }
+}
