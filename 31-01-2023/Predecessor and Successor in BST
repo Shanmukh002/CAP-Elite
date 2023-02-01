@@ -1,0 +1,29 @@
+// Predecessor and Successor in BST
+
+class GfG
+{
+    public static void findPreSuc(Node root, Res p, Res s, int key)
+    {
+		// Write your code here.
+		Node root1 = root;
+		Node root2 = root;
+		while(root1!=null){
+			if(key<=root1.data){
+				root1 = root1.left;
+			}
+			else{
+				p.pre = root1;
+				root1 = root1.right;
+			}
+		}
+		while(root2!=null){
+			if(key>=root2.data){
+				root2=root2.right;
+			}
+			else{
+				s.succ=root2;
+				root2=root2.left;
+			}
+		}
+	}
+}
